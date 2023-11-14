@@ -2,23 +2,51 @@
 <html>
 <head>
     <title>Générateur Gcode</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #logo {
+            max-width: 100px; /* Ajuste la taille du logo selon tes besoins */
+        }
+
+        #content {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+
+        textarea {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <label for="longueur">Longueur du trait :</label>
-    <input type="number" id="longueur" name="longueur" min="0" step="1">
-    
-    <label for="imprimante">Sélectionnez le type d'imprimante :</label>
-    <select id="imprimante">
-      <option value="reprap">RepRap</option>
-      <option value="ultimaker">Ultimaker</option>
-      <option value="makerbot">Makerbot</option>
-      <option value="prusa">Prusa</option>
-    </select>
-    
-    <button onclick="genererGcode()">Générer Gcode</button>
-    
-    <textarea id="zoneTexte" rows="10" cols="50"></textarea>
-    <button onclick="copierTexte()">Copier dans le presse-papiers</button>
+    <div id="content">
+        <label for="longueur">Longueur du trait :</label>
+        <input type="number" id="longueur" name="longueur" min="0" step="1">
+        
+        <label for="imprimante">Sélectionnez le type d'imprimante :</label>
+        <select id="imprimante">
+          <option value="reprap">RepRap</option>
+          <option value="ultimaker">Ultimaker</option>
+          <option value="makerbot">Makerbot</option>
+          <option value="prusa">Prusa</option>
+        </select>
+        
+        <button onclick="genererGcode()">Générer Gcode</button>
+        
+        <textarea id="zoneTexte" rows="10" cols="50"></textarea>
+        <button onclick="copierTexte()">Copier dans le presse-papiers</button>
+    </div>
+
+    <div>
+        <img id="logo" src="logo.png" alt="Logo">
+        <h1>Générateur Gcode</h1>
+    </div>
 
     <script>
         function genererGcode() {
