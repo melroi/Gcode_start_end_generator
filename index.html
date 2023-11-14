@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Générateur Gcode</title>
+</head>
+<body>
+    <label for="longueur">Longueur du trait :</label>
+    <input type="number" id="longueur" name="longueur" min="0" step="1">
+    
+    <label for="imprimante">Sélectionnez le type d'imprimante :</label>
+    <select id="imprimante">
+      <option value="reprap">RepRap</option>
+      <option value="ultimaker">Ultimaker</option>
+      <option value="makerbot">Makerbot</option>
+      <option value="prusa">Prusa</option>
+    </select>
+    
+    <button onclick="genererGcode()">Générer Gcode</button>
+    
+    <textarea id="zoneTexte" rows="10" cols="50"></textarea>
+    <button onclick="copierTexte()">Copier dans le presse-papiers</button>
 
+    <script>
+        function genererGcode() {
+            var longueur = document.getElementById("longueur").value;
+            var typeImprimante = document.getElementById("imprimante").value;
+            var gcode = generateGcode(longueur, typeImprimante);
+            
+            // Afficher le Gcode dans la zone de texte
+            document.getElementById("zoneTexte").value = gcode;
+        }
+        
+        function copierTexte() {
+            // Copier le texte dans le presse-papiers
+            var zoneTexte = document.getElementById("zoneTexte");
+            zoneTexte.select();
+            document.execCommand("copy");
+        }
+        
+        function generateGcode(longueur, typeImprimante) {
+            if (typeImprimante === "reprap") {
+                return generateRepRapGcode(longueur);
+            } else if (typeImprimante === "ultimaker") {
+                return generateUltimakerGcode(longueur);
+            } else if (typeImprimante === "makerbot") {
+                return generateMakerbotGcode(longueur);
+            } else if (typeImprimante === "prusa") {
+                return generatePrusaGcode(longueur);
+            }
+        }
+        
+        function generateRepRapGcode(longueur) {
+            return "G1 X0 Y0 Z0 ; Position de départ\n" +
+                   "G1 X" + longueur + " Y0 Z0 ; Trajet de " + longueur + " unités en X\n" +
+                   "G1 E1 ; Extrusion de 1mm de filament\n" +
+                   "G1 X0 Y0 Z0 ; Retour à la position de départ\n";
+        }
+        
+        function generateUltimakerGcode(longueur) {
+            return "G0 X0 Y0 Z0 ; Déplacement rapide à la position de départ\n" +
+                   "G1 X" + longueur + " Y0 Z0 F3000 ; Trajet de " + longueur + " unités en X\n" +
+                   "G92 E1 ; Initialisation de l'extrusion\n" +
+                   "G1 E10 ; Extrusion de 10mm de filament\n" +
+                   "G92 E0 ; Réinitialisation de l'extrusion\n" +
+                   "G0 X0 Y0 Z0 ; Retour à la position de départ\n";
+        }
+        
+        function generateMakerbotGcode(longueur) {
+            return "G0 X0 Y0 Z0 ; Déplacement rapide à la position de départ\n" +
+                   "G1 X" + longueur + " Y0 Z0 ; Trajet de " + longueur + " unités en X\n" +
+                   "G92 E1 ; Initialisation de l'extrusion\n" +
+                   "G1 E5 ; Extrusion de 5mm de filament\n" +
+                   "G92 E0 ; Réinitialisation de l'extrusion\n" +
+                   "G0 X0 Y0 Z0 ; Retour à la position de départ\n";
+        }
+        
+        function generatePrusaGcode(longueur) {
+            return "G0 X0 Y0 Z0 ; Déplacement rapide à la position de départ\n" +
+                   "G1 X" + longueur + " Y0 Z0 ; Trajet de " + longueur + " unités en X\n" +
+                   "G92 E1 ; Initialisation de l'extrusion\n" +
+                   "G1 E8 ; Extrusion de 8mm de filament\n" +
+                   "G92 E0 ; Réinitialisation de l'extrusion\n" +
+                   "G0 X0 Y0 Z0 ; Retour à la position de départ\n";
+        }
+    </script>
+</body>
+</html>
