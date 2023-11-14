@@ -26,6 +26,10 @@
     </style>
 </head>
 <body>
+    <div>
+        <img id="logo" src="assets/img/IMG_1055.png" alt="Logo">
+        <h1>Générateur Gcode</h1>
+    </div>
     <div id="content">
         <label for="longueur">Longueur du trait :</label>
         <input type="number" id="longueur" name="longueur" min="0" step="1">
@@ -44,10 +48,7 @@
         <button onclick="copierTexte()">Copier dans le presse-papiers</button>
     </div>
 
-    <div>
-        <img id="logo" src="assets/img/IMG_1055.png" alt="Logo">
-        <h1>Générateur Gcode</h1>
-    </div>
+    
 
     <script>
         function genererGcode() {
