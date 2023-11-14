@@ -4,15 +4,14 @@
     <title>Générateur Gcode</title>
     <style>
         body {
-    display: flex;
-    flex-direction: column; /* Pour empiler les éléments verticalement */
-    align-items: flex-start; /* Aligner le contenu à gauche */
-    padding: 20px;
-}
+            display: flex;
+            flex-direction: column; /* Pour empiler les éléments verticalement */
+            align-items: flex-start; /* Aligner le contenu à gauche */
+            padding: 20px;
         }
 
         #logo {
-            max-width: 100px; /* Ajuste la taille du logo selon tes besoins */
+            max-width: 35px; /* Ajuste la taille du logo selon tes besoins */
         }
 
         #content {
@@ -47,8 +46,6 @@
         <textarea id="zoneTexte" rows="10" cols="50"></textarea>
         <button onclick="copierTexte()">Copier dans le presse-papiers</button>
     </div>
-
-    
 
     <script>
         function genererGcode() {
